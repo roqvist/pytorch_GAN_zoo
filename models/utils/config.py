@@ -88,7 +88,11 @@ def getConfigOverrideFromParser(parsedArgs, defaultConfig):
             continue
 
         if arg in vars(defaultConfig):
-            output[arg] = value
+            if arg == 'maxIterAtScale':
+                new_val = ''.join(value)
+                output[arg] = [int(s.strip()) for s in new_val.split(',')]
+            else:
+                output[arg] = value
 
     return output
 
